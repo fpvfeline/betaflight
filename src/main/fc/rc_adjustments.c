@@ -815,8 +815,8 @@ static void processContinuosAdjustments(controlRateConfig_t *controlRateConfig)
                     if (adjustmentFunction == ADJUSTMENT_RATE_PROFILE && systemConfig()->rateProfile6PosSwitch) {
                         switchPositions =  6;
                     }
-                    const uint16_t rangeWidth = (2100 - 900) / switchPositions;
-                    const uint8_t position = (constrain(rcData[channelIndex], 900, 2100 - 1) - 900) / rangeWidth;
+                    const uint16_t rangeWidth = (PWM_RANGE_MAX - PWM_RANGE_MIN) / switchPositions;
+                    const uint8_t position = (constrain(rcData[channelIndex], PWM_RANGE_MIN, PWM_RANGE_MAX) - PWM_RANGE) / rangeWidth;
                     newValue = applySelectAdjustment(adjustmentFunction, position);
 
                     setConfigDirtyIfNotPermanent(&adjustmentRange->range);
